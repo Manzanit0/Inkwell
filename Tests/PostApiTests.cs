@@ -73,6 +73,13 @@ namespace Tests
         }
 
         [Fact]
+        public void GetWithInvalidIdReturnsNotFound()
+        {
+            var result = _controller.Get(Guid.NewGuid()) as NotFoundResult;
+            Assert.NotNull(result);
+        }
+
+        [Fact]
         public void PostCreatesNewRecord()
         {
             Assert.Equal(2, DbPosts.Count);
