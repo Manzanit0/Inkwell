@@ -17,36 +17,49 @@ namespace API.Posts
         }
 
         [HttpGet]
-        public IEnumerable<Post> Get()
+        public IActionResult Get()
         {
-            return _context.Posts.ToList();
+            return Ok(_context.Posts.ToList());
         }
 
         [HttpGet("{id}")]
-        public Post Get(Guid id)
+        public IActionResult Get(Guid id)
         {
-            return _context.GetPost(id);
+            var post = _context.GetPost(id);
+            if (post == null) return NotFound();
+            
+            return Ok(post);
         }
 
         [HttpPost]
-        public void Post([FromBody] Post post)
+        public IActionResult Post([FromBody] Post post)
         {
             _context.InsertPost(post);
+            return Created($"/posts/{post.Id}", post);
         }
 
         [HttpPut("{id}")]
-        public void Put(Guid id, [FromBody] Post value)
+        public IActionResult Put(Guid id, [FromBody] Post post)
         {
-            // Just in case the user of the API puts the Id in the url but not in the body.
-            if (value.Id.Equals(new Guid())) value.Id = id;
+            if (post.Id == Guid.Empty) post.Id = id;
+            else if (post.Id != id) return BadRequest("The Id of the body doesn't match the URI.");
             
-            _context.UpsertPost(value);
+            var existingPost = _context.GetPost(post.Id);
+            if (existingPost == null)
+            {
+                _context.InsertPost(post);
+                return Created($"/posts/{post.Id}", post);
+            }
+
+            _context.Update(existingPost, post);
+            return Ok(post);
         }
 
         [HttpDelete("{id}")]
-        public void Delete(Guid id)
+        public IActionResult Delete(Guid id)
         {
             _context.DeletePost(id);
+            return Ok();
         }
     }
 }

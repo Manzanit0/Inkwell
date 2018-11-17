@@ -21,7 +21,7 @@ namespace API.Posts
         public void DeletePost(Guid id)
         {
             var item = GetPost(id);
-            if (item!= null)
+            if (item != null)
             {
                 Posts.Remove(item);
                 SaveChanges();
@@ -30,28 +30,20 @@ namespace API.Posts
 
         public void InsertPost(Post post)
         {
-            post.Id = Guid.NewGuid();
+            if(post.Id == Guid.Empty) post.Id = Guid.NewGuid();
             post.CreatedDate = DateTime.Now;
             
             Posts.Add(post);
             SaveChanges();
         }
-    
-        public void UpsertPost(Post post)
-        {
-            var existingPost = GetPost(post.Id);
-            if (existingPost != null)
-            {
-                existingPost.Title = post.Title;
-                existingPost.Content = post.Content;
-                existingPost.Author = post.Author;
-                existingPost.CreatedDate = post.CreatedDate;
-                SaveChanges();
-            }
-            else
-            {
-                InsertPost(post);
-            }
+
+        public void Update(Post existingPost, Post newPost)
+        {            
+            existingPost.Title = newPost.Title;
+            existingPost.Content = newPost.Content;
+            existingPost.Author = newPost.Author;
+            existingPost.CreatedDate = newPost.CreatedDate;
+            SaveChanges();
         }
     }
 }
