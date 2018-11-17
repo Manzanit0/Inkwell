@@ -19,13 +19,13 @@ namespace API.Posts
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(_context.Posts.ToList());
+            return Ok(_context.FindAll());
         }
 
         [HttpGet("{id}")]
         public IActionResult Get(Guid id)
         {
-            var post = _context.GetPost(id);
+            var post = _context.Find(id);
             if (post == null) return NotFound();
             
             return Ok(post);
@@ -34,7 +34,7 @@ namespace API.Posts
         [HttpPost]
         public IActionResult Post([FromBody] Post post)
         {
-            _context.InsertPost(post);
+            _context.Insert(post);
             return Created($"/posts/{post.Id}", post);
         }
 
@@ -44,10 +44,10 @@ namespace API.Posts
             if (post.Id == Guid.Empty) post.Id = id;
             else if (post.Id != id) return BadRequest("The Id of the body doesn't match the URI.");
             
-            var existingPost = _context.GetPost(post.Id);
+            var existingPost = _context.Find(post.Id);
             if (existingPost == null)
             {
-                _context.InsertPost(post);
+                _context.Insert(post);
                 return Created($"/posts/{post.Id}", post);
             }
 
@@ -58,12 +58,10 @@ namespace API.Posts
         [HttpDelete("{id}")]
         public IActionResult Delete(Guid id)
         {
-            var item = _context.GetPost(id);
+            var item = _context.Find(id);
             if (item == null) return NotFound();
             
-            _context.Posts.Remove(item);
-            _context.SaveChanges();
-            
+            _context.Delete(item);
             return Ok();
         }
     }

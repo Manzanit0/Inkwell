@@ -24,14 +24,13 @@ namespace Tests
         private readonly PostsDbContext _dbContext;
         private readonly PostsController _controller;
 
-        private List<Post> DbPosts => _dbContext.Posts.ToList();
+        private List<Post> DbPosts => _dbContext.FindAll();
 
         private static PostsDbContext CreateDbContextWithData()
         {
             var dbContext = new PostsDbContext(Options);
-            dbContext.Posts.Add(new Post {Id = Guid.NewGuid(), Author = "XXX", Title = "YYY", Content = "ZZZ"});
-            dbContext.Posts.Add(new Post {Id = Guid.NewGuid(), Author = "XXX", Title = "YYY", Content = "ZZZ"});
-            dbContext.SaveChanges();
+            dbContext.Insert(new Post {Id = Guid.NewGuid(), Author = "XXX", Title = "YYY", Content = "ZZZ"});
+            dbContext.Insert(new Post {Id = Guid.NewGuid(), Author = "XXX", Title = "YYY", Content = "ZZZ"});
             return dbContext;
         }
 
@@ -57,8 +56,8 @@ namespace Tests
         [Fact]
         public void DeleteWithInvalidIdReturnsNotFound()
         {
-            var result = _controller.Delete(Guid.NewGuid()) as NotFoundResult;
-            Assert.NotNull(result);
+            var result = _controller.Delete(Guid.NewGuid());
+            Assert.True(result is NotFoundResult);
         }
 
         [Fact]
@@ -82,8 +81,8 @@ namespace Tests
         [Fact]
         public void GetWithInvalidIdReturnsNotFound()
         {
-            var result = _controller.Get(Guid.NewGuid()) as NotFoundResult;
-            Assert.NotNull(result);
+            var result = _controller.Get(Guid.NewGuid());
+            Assert.True(result is NotFoundResult);
         }
 
         [Fact]
@@ -130,9 +129,9 @@ namespace Tests
         [Fact]
         public void PutReturnsBadRequestUponIdMismatch()
         {
-            var result = _controller.Put(Guid.NewGuid(), new Post {Id = Guid.NewGuid()}) as BadRequestObjectResult;
+            var result = _controller.Put(Guid.NewGuid(), new Post {Id = Guid.NewGuid()});
 
-            Assert.NotNull(result);
+            Assert.True(result is BadRequestObjectResult);
             Assert.Equal(2, DbPosts.Count);
         }
     }

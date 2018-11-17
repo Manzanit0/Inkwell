@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,14 +12,19 @@ namespace API.Posts
         {
         }
 
-        public DbSet<Post> Posts { get; set; }
+        private DbSet<Post> Posts { get; set; }
+
+        public List<Post> FindAll()
+        {
+            return Posts.ToList();
+        }
         
-        public Post GetPost(Guid id)
+        public Post Find(Guid id)
         {
             return Posts.FirstOrDefault(x => x.Id == id);
         }
 
-        public void InsertPost(Post post)
+        public void Insert(Post post)
         {
             if(post.Id == Guid.Empty) post.Id = Guid.NewGuid();
             post.CreatedDate = DateTime.Now;
@@ -33,6 +39,12 @@ namespace API.Posts
             existingPost.Content = newPost.Content;
             existingPost.Author = newPost.Author;
             existingPost.CreatedDate = newPost.CreatedDate;
+            SaveChanges();
+        }
+
+        public void Delete(Post post)
+        {
+            Posts.Remove(post);
             SaveChanges();
         }
     }
