@@ -53,6 +53,13 @@ namespace Tests
             Assert.Equal(1, DbPosts.Count);
             Assert.Null(DbPosts.Find(x => x.Id == existingPost.Id));
         }
+        
+        [Fact]
+        public void DeleteWithInvalidIdReturnsNotFound()
+        {
+            var result = _controller.Delete(Guid.NewGuid()) as NotFoundResult;
+            Assert.NotNull(result);
+        }
 
         [Fact]
         public void GetReturnsAllRecords()

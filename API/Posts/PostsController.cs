@@ -58,7 +58,12 @@ namespace API.Posts
         [HttpDelete("{id}")]
         public IActionResult Delete(Guid id)
         {
-            _context.DeletePost(id);
+            var item = _context.GetPost(id);
+            if (item == null) return NotFound();
+            
+            _context.Posts.Remove(item);
+            _context.SaveChanges();
+            
             return Ok();
         }
     }

@@ -18,16 +18,6 @@ namespace API.Posts
             return Posts.FirstOrDefault(x => x.Id == id);
         }
 
-        public void DeletePost(Guid id)
-        {
-            var item = GetPost(id);
-            if (item != null)
-            {
-                Posts.Remove(item);
-                SaveChanges();
-            }
-        }
-
         public void InsertPost(Post post)
         {
             if(post.Id == Guid.Empty) post.Id = Guid.NewGuid();
