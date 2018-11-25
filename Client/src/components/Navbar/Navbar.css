@@ -1,0 +1,30 @@
+.nav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.nav__element {
+  float: left;
+}
+
+.nav__element > a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.nav__element--active > a {
+  background-color: #0099cc;
+}
+
+.nav__element > a:hover {
+  background-color: #111;
+}
