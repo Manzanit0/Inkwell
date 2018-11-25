@@ -20,6 +20,7 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddCors();
 
             services.AddDbContext<PostsDbContext>(options =>
                 options.UseMySql(Configuration.GetConnectionString("LocalConnection")));
@@ -31,6 +32,10 @@ namespace API
                 app.UseDeveloperExceptionPage();
             else
                 app.UseHsts();
+
+            app.UseCors(builder =>
+                builder.WithOrigins(Configuration.GetValue<string>("AllowedHosts"))
+                       .AllowAnyMethod());
 
             app.UseHttpsRedirection();
             app.UseMvc();
