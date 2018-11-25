@@ -1,5 +1,9 @@
+# System & IDEs
 .DS_Store
 .idea
+.vscode
+
+# Project
 obj
 bin
 API/Migrations
