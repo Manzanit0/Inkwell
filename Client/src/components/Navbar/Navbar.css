@@ -11,6 +11,7 @@
 
 .nav__element {
   float: left;
+  font-weight: bold;
 }
 
 .nav__element > a {
