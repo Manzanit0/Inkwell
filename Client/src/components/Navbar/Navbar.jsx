@@ -6,7 +6,7 @@ export class Navbar extends Component {
     return (
       <div>
         <ul className="nav">
-          <li className="nav__element nav__element--active"><a href="###">Home</a></li>
+          <li className="nav__element nav__element--active"><a href="/">Home</a></li>
           <li className="nav__element"><a href="###">Content</a></li>
           <li className="nav__element"><a href="###">About</a></li>
         </ul>
