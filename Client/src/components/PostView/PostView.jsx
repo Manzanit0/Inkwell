@@ -17,9 +17,9 @@ export class PostView extends Component {
     
     render() {
         return (
-            <div className="post-preview-card">
-                <h3 className="post-preview-card__heading">{this.state.title}</h3>
-                <p>{this.state.content}</p>
+            <div className="post-view">
+                <h3 className="post-view__title">{this.state.title}</h3>
+                <div className="post-view__content">{this.state.content}</div>
             </div>
         );
     }

@@ -1,23 +1,17 @@
-.post-preview-card {
-  /* Add shadows to create the "card" effect */
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;
-
-  border-radius: 5px; /* 5px rounded corners */
-  margin: 10px;
-
+.post-view {
+  border-radius: 5px;
+  margin: 100px;
   padding: 2px 16px;
   background-color: #ecf2f8;
-
-  flex-wrap: wrap;
-  cursor: pointer;
 }
 
-.post-preview-card__heading {
+.post-view__title {
   text-align: center;
+  text-transform: uppercase;
 }
 
-/* On mouse-over, add a deeper shadow */
-.post-preview-card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+.post-view__content {
+  text-align: justify;
+  white-space: pre-line;
+  padding-bottom: 20px;
 }
