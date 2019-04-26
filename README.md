@@ -12,6 +12,8 @@ If you already have MariaDB installed, run the service:
 mysql.server start
 ```
 
+[Some handy `mysql` commands](http://g2pc1.bu.edu/~qzpeng/manual/MySQL%20Commands.htm)
+
 With the project cloned and the DB service in place, execute migrations. 
 This will create the Database with the correct schema for the project.
 
