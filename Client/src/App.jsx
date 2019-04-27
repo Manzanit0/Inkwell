@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom';
 import { PostList } from "./components/PostList/PostList";
 import { Navbar } from "./components/Navbar/Navbar";
 import { PostView } from "./components/PostView/PostView"
+import { AboutPage} from "./pages/AboutPage";
 import { fetchPostsWithBlurb } from "./callouts";
 
 class App extends Component {
@@ -22,6 +23,7 @@ class App extends Component {
                 <Navbar />
                 <Route exact path="/" render={props => <PostList posts={this.state.posts} />}/>
                 <Route path="/post" component={PostView}/>
+                <Route path="/about" component={AboutPage}/>
             </div>
         );
     }
