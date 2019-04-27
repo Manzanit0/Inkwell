@@ -22,8 +22,8 @@
   text-decoration: none;
 }
 
-.nav__element--active > a {
-  background-color: #0099cc;
+.nav__element--active {
+  background-color: #0099cc !important;
 }
 
 .nav__element > a:hover {
