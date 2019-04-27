@@ -1,0 +1,12 @@
+.post-view-heading {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.post-view-heading__title {
+    text-transform: uppercase;
+}
+
+.post-view-heading__subtitle {
+    font-style: italic;
+}

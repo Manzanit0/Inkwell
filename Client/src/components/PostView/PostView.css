@@ -1,13 +1,10 @@
 .post-view {
   border-radius: 5px;
-  margin: 100px;
-  padding: 2px 16px;
+  width: 40%;
+  margin: auto;
+  margin-top: 80px;
+  padding: 2px 24px;
   background-color: #ecf2f8;
-}
-
-.post-view__title {
-  text-align: center;
-  text-transform: uppercase;
 }
 
 .post-view__content {
