@@ -1,0 +1,9 @@
+.post-form {
+    display: grid;
+    grid-template-columns: 150px auto 150px;
+    grid-gap: 1em;
+}
+
+.post-form__row {
+    grid-template-rows: ;
+}
